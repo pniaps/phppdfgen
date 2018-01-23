@@ -1,0 +1,24 @@
+{
+  "name": "pniaps/ppg",
+  "description": "PHP Pdf Gen",
+  "keywords": ["php","pdf","generator"],
+  "homepage": "https://github.com/pniaps/ppg",
+  "minimum-stability": "dev",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Pedro Peña",
+      "email": "pniaps@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.0.0",
+    "tecnickcom/tcpdf": "~6.2"
+  },
+  "autoload": {
+    "psr-4": { "ppg\\": "src" }
+  },
+  "require-dev": {
+    "fzaninotto/faker": "^1.8@dev"
+  }
+}
