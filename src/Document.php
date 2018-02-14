@@ -21,6 +21,8 @@ class Document implements ArrayAccess
 
     protected $saved_y = 0;
 
+    protected $filename = 'document.pdf';
+
     public function __construct()
     {
     }
@@ -110,6 +112,18 @@ class Document implements ArrayAccess
         return $this;
     }
 
+    public function setFileName($name)
+    {
+        $this->filename = $name;
+
+        return $this;
+    }
+
+    public function getFileName()
+    {
+        return $this->filename;
+    }
+
     /**
      * return the document as a string.
      *
@@ -125,8 +139,11 @@ class Document implements ArrayAccess
      *
      * @param string $name The name of the file when saved. Note that special characters are removed and blanks characters are replaced with the underscore character.
      */
-    public function inline($name = 'document.pdf')
+    public function inline($name = null)
     {
+        if (!$name){
+            $name = $this->filename;
+        }
         $this->getPdf()->Output($name, 'I');
         die();
     }
@@ -136,8 +153,11 @@ class Document implements ArrayAccess
      *
      * @param string $name The name of the file when saved. Note that special characters are removed and blanks characters are replaced with the underscore character.
      */
-    public function download($name = 'document.pdf')
+    public function download($name = null)
     {
+        if (!$name){
+            $name = $this->filename;
+        }
         $this->getPdf()->Output($name, 'D');
         die();
     }
@@ -147,8 +167,11 @@ class Document implements ArrayAccess
      *
      * @param string $name The name of the file when saved. Note that special characters are removed and blanks characters are replaced with the underscore character.
      */
-    public function save($path = 'document.pdf')
+    public function save($path = null)
     {
+        if($path && is_dir($path)){
+            $path .= DIRECTORY_SEPARATOR . $this->filename;
+        }
         $this->getPdf()->Output($path, 'F');
     }
 
