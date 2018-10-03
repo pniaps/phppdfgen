@@ -1,6 +1,6 @@
 {
-  "name": "pniaps/ppg",
-  "description": "PHP Pdf Gen",
+  "name": "pniaps/phppdfgen",
+  "description": "PHP PDF Generator",
   "keywords": ["php","pdf","generator"],
   "homepage": "https://github.com/pniaps/ppg",
   "minimum-stability": "dev",
