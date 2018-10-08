@@ -11,7 +11,7 @@ class Image extends Element
 
     public function render()
     {
-        $bounds = $this->getBounds(true, true, false);
+        $bounds = $this->getBounds(false, false, false);
 
         $border = $this->getBorder();
 
