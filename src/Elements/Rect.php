@@ -16,7 +16,7 @@ class Rect extends Element
 
         $border = $this->data['border'] ? $this->pdf->getCSSBorderStyle($this->data['border']) : null;
 
-        $fill_color = TCPDF_COLORS::convertHTMLColorToDec($this->data['background-color'],$this->pdf->getAllSpotColors());
+        $fill_color = $this->data['background-color'] ? TCPDF_COLORS::convertHTMLColorToDec($this->data['background-color'],$this->pdf->getAllSpotColors()) : null;
 
         $style = '';
 
