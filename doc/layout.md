@@ -82,6 +82,7 @@ All objets needs an attribute named `type` whose value will determine what objec
 | `right` | Abscissa of bottom-right corner. Don't define `width` to use this. |
 | `bottom` | Ordinate of bottom-right corner. Don't define `height` to use this. |
 | `src` | Name of the file containing the image or a '@' character followed by the image data string. To link an image without embedding it on the document, set an asterisk character before the URL (i.e.: '*http://www.example.com/image.jpg'). |
+| `center` | Set to `true` to center the image if smaller than `width` |
 
 #### Text
 

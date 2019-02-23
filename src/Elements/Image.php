@@ -15,6 +15,14 @@ class Image extends Element
 
         $border = $this->getBorder();
 
+        if($this->data['center']){
+            list($imgwidth, $imgheight) = $this->pdf->imageDimensions($this->data['src']);
+            if($imgwidth < $bounds['width']){
+                $bounds['x'] += (($bounds['width'] - $imgwidth) / 2);
+                $bounds['width'] = $imgwidth;
+            }
+        }
+
         $this->pdf->Image($this->data['src'], $bounds['x'], $bounds['y'], $bounds['width'], $bounds['height'], '', '', 'N', false, 300, '', false, false, $border, 'CM');
 
 //        $this->pdf->SetY($this->pdf->GetY()+5); //TODO: margin-bottom

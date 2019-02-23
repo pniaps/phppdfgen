@@ -159,4 +159,15 @@ class PDF extends TCPDF
     {
         return array_key_exists($font, $this->CoreFonts);
     }
+
+    /**
+     * Return the imagen dimensions in page unit
+     * @param $img
+     * @return array
+     */
+    public function imageDimensions($img)
+    {
+        $this->Image($img, 0, 0, 0, 0, '', '', '', false, 300, '', false, false, 0, false,true);
+        return [$this->getImageRBX(), $this->getImageRBY()];
+    }
 }
