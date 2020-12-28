@@ -59,13 +59,16 @@ class Table extends Element
         }
 
         if ($this->data['rows']) {
+            if(is_string($this->data['rows']) && preg_match('/{([\w_.-]+)}/',$this->data['rows'], $matches)){
+                $this->data['rows'] = $this->document->getData($matches[1]);
+            }
             foreach ($this->data['rows'] as $row) {
                 if (isset($this->data['left'])) {
                     $this->pdf->SetX($this->data['left']);
                 }
                 $height = 0;
                 foreach ($row as $index => &$columnText) {
-                    $columnText = preg_replace_callback('/\{([\w-_\.]+)\}/', function(array $matches){
+                    $columnText = preg_replace_callback('/{([\w_.-]+)}/', function(array $matches){
                         return $this->document->getData($matches[1]);
                     }, $columnText);
                     $height = max($height, $this->pdf->getStringHeight($columns[$index]['width'], $columnText));

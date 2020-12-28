@@ -38,7 +38,7 @@ class Text extends Element
         $this->pdf->SetY($this->pdf->GetY()+(float)$this->data['margin']);
 
         //TODO: margin , padding
-        $this->data['text'] = preg_replace_callback('/\{([\w-_\.]+)\}/', function(array $matches){
+        $this->data['text'] = preg_replace_callback('/{([\w_.-]+)}/', function(array $matches){
             return $this->document->getData($matches[1]);
         }, $this->data['text']);
         $this->pdf->MultiCell($bounds['width'], $bounds['height'], $this->data['text'], $border, $align, (bool)$fill_color, 1, $bounds['x'], $bounds['y']);
