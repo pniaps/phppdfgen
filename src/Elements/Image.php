@@ -23,6 +23,11 @@ class Image extends Element
             }
         }
 
+        if(!$bounds['width'] && $bounds['height']){
+            $this->pdf->Image($this->data['src'], $bounds['x'], $bounds['y'], $bounds['width'], $bounds['height'], '', '', 'N', false, 300, '', false, false, 0, false, 'CM');
+            $bounds['x'] += (($bounds['width'] + $bounds['x'] - $this->pdf->getImageRBX()) / 2);
+        }
+
         $this->pdf->Image($this->data['src'], $bounds['x'], $bounds['y'], $bounds['width'], $bounds['height'], '', '', 'N', false, 300, '', false, false, $border, 'CM');
 
 //        $this->pdf->SetY($this->pdf->GetY()+5); //TODO: margin-bottom
