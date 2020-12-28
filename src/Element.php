@@ -64,10 +64,13 @@ abstract class Element
             'height' => $this->data['height']
         ];
 
-        if (!$bounds['width'] && $this->data['right']) {
+        if (is_null($bounds['width']) && !is_null($this->data['right']) && !is_null($this->data['left'])) {
             $bounds['width'] = $this->data['right'] - $this->data['left'];
         }
-        if (!$bounds['height'] && $this->data['bottom']) {
+        if (is_null($bounds['x']) && !is_null($this->data['right']) && !is_null($this->data['width'])) {
+            $bounds['x'] = $this->data['right'] - $this->data['width'];
+        }
+        if (is_null($bounds['height']) && !is_null($this->data['bottom'])) {
             $bounds['height'] = $this->data['bottom'] - $this->data['top'];
         }
 
