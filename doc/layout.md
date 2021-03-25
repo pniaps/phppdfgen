@@ -18,13 +18,14 @@ Defines the global properties of the PDF document.
 
 | Attribute | Value |
 |-----------|-------|
-|`page-format`| One of the string values specified at [`TCPDF_STATIC::$page_formats`](https://github.com/tecnickcom/TCPDF/blob/master/include/tcpdf_static.php#L2097). Optional, `AA4` if not specified|
-|`orientation`| page orientation. Possible values are `portrait`, `landscape` and '' (empty string) for automatic orientation.Optional, `portrait` if not specified|
-|`margin`| Array of margins, left, top, right and bottom, for example `[ 10, 10, 10, 10 ]`|
+|`orientation`| Page orientation. Possible values are `portrait`, `landscape` and '' (empty string) for automatic orientation. Optional, `portrait` if not specified|
+|`unit`|User measure unit. Possible values are:<ul><li>pt: point</li><li>mm: millimeter (default)</li><li>cm: centimeter</li><li>in: inch</li></ul>A point equals 1/72 of inch, that is to say about 0.35 mm (an inch being 2.54 cm). This is a very common unit in typography; font sizes are expressed in that unit.|
+|`page-format`| One of the string values specified at [`TCPDF_STATIC::$page_formats`](https://github.com/tecnickcom/TCPDF/blob/main/include/tcpdf_static.php#L2129). Optional, `A4` if not specified|
+|`margin`| Array of margins, left, top, right and bottom, for example `[ 10, 10, 10, 10 ]`. You can use single value to make all margins equals.|
 | `font-family` | Family font. It can be either a name defined by AddFont() or one of the standard Type1 families (case insensitive):<ul><li>times (Times-Roman)</li><li>timesb (Times-Bold)</li><li>timesi (Times-Italic)</li><li>timesbi (Times-BoldItalic)</li><li>helvetica (Helvetica)</li><li>helveticab (Helvetica-Bold)</li><li>helveticai (Helvetica-Oblique)</li><li>helveticabi (Helvetica-BoldOblique)</li><li>courier (Courier)</li><li>courierb (Courier-Bold)</li><li>courieri (Courier-Oblique)</li><li>courierbi (Courier-BoldOblique)</li><li>symbol (Symbol)</li><li>zapfdingbats (ZapfDingbats)</li></ul> It is also possible to pass an empty string. In that case, the current family is retained.. |
 | `font-size` | Font size in points.<br/>The default value is the current size. If no size has been specified since the beginning of the document, the value taken is 12. |
 | `font-style` | Font style. Possible values are (case insensitive):<ul><li>empty string: regular</li><li>B: bold</li><li>I: italic</li><li>U: underline</li><li>D: line through</li><li>O: overline</li></ul> or any combination.<br />The default value is regular.<br />Bold and italic styles do not apply to Symbol and ZapfDingbats basic fonts or other fonts when not defined. |
-| `padding` | Global internal cell padding. Number oy array of cell paddings for left, top, right and bottom, for example `2` or `[ 2, 2, 2, 2 ]`|
+| `padding` | Global internal cell padding. Number or array of cell paddings for left, top, right and bottom, for example `2` or `[ 2, 2, 2, 2 ]`|
 
 ### header
 Defines the `header` objects

@@ -6,6 +6,8 @@ namespace ppg;
 
 use TCPDF;
 use TCPDF_COLORS;
+use TCPDF_FONTS;
+use TCPDF_STATIC;
 
 /**
  * Class PDF
@@ -44,18 +46,9 @@ class PDF extends TCPDF
         );
         $this->SetAutoPageBreak(true, $layout['document']['margin'][4]);
 
-        if (is_array($layout['document']['padding'])) {
-            $this->setCellPaddings(
-                $layout['document']['padding'][0], //left
-                $layout['document']['padding'][1], //top
-                $layout['document']['padding'][2], //right
-                $layout['document']['padding'][3] //bottom
-            );
-        } else if ($layout['document']['padding']) {
-            $this->SetCellPadding($layout['document']['padding']);
-        }
-
         $this->layout = $layout;
+
+        $this->configurePadding();
 
         $this->FontFamily = $layout['document']['font-family'] ?: $this->FontFamily;
         $this->FontStyle = $layout['document']['font-style'] ?: $this->FontStyle;
@@ -74,10 +67,8 @@ class PDF extends TCPDF
         ]);
     }
 
-
-    public function Header()
+    private function configurePadding()
     {
-        //restore global padding
         if (is_array($this->layout['document']['padding'])) {
             $this->setCellPaddings(
                 $this->layout['document']['padding'][0], //left
@@ -88,6 +79,12 @@ class PDF extends TCPDF
         } else if ($this->layout['document']['padding']) {
             $this->SetCellPadding($this->layout['document']['padding']);
         }
+    }
+
+    public function Header()
+    {
+        //restore global padding
+        $this->configurePadding();
 
         if ($this->layout['header'] && is_array($this->layout['header']['objects'])) {
             $top = $this->y;
@@ -105,16 +102,7 @@ class PDF extends TCPDF
     public function Footer()
     {
         //restore global padding
-        if (is_array($this->layout['document']['padding'])) {
-            $this->setCellPaddings(
-                $this->layout['document']['padding'][0], //left
-                $this->layout['document']['padding'][1], //top
-                $this->layout['document']['padding'][2], //right
-                $this->layout['document']['padding'][3] //bottom
-            );
-        } else if ($this->layout['document']['padding']) {
-            $this->SetCellPadding($this->layout['document']['padding']);
-        }
+        $this->configurePadding();
 
         if ($this->layout['footer'] && is_array($this->layout['footer']['objects'])) {
             foreach ($this->layout['footer']['objects'] as $data) {
