@@ -28,8 +28,13 @@ class Image extends Element
             $bounds['x'] += (($bounds['width'] + $bounds['x'] - $this->pdf->getImageRBX()) / 2);
         }
 
-        $this->pdf->Image($this->data['src'], $bounds['x'], $bounds['y'], $bounds['width'], $bounds['height'], '', '', 'N', false, 300, '', false, false, $border, 'CM');
+        $file = $this->data['src'];
 
-//        $this->pdf->SetY($this->pdf->GetY()+5); //TODO: margin-bottom
+        if($bounds['y']<0){
+            //make negative top relative to bottom
+            $bounds['y'] = $this->pdf->getPageHeight() + $bounds['y'];
+        }
+
+        $this->pdf->Image($file, $bounds['x'], $bounds['y'], $bounds['width'], $bounds['height'], '', '', 'N', false, 300, '', false, false, $border, 'CM');
     }
 }
