@@ -33,7 +33,7 @@ Defines the `header` objects
 | Attribute | Value |
 |-----------|-------|
 |`objects`| Array of [Objects](#objects)|
-|`margin`| Margin between header and body (at the header bottom)|
+|`margin`| Margin between header and body (at the header bottom). Default value is top page margin.|
 
 ### body
 Defines the `body` objects
@@ -83,7 +83,7 @@ All objets needs an attribute named `type` whose value will determine what objec
 | `right` | Abscissa of bottom-right corner. Don't define `width` to use this. |
 | `bottom` | Ordinate of bottom-right corner. Don't define `height` to use this. |
 | `src` | Name of the file containing the image or a '@' character followed by the image data string. To link an image without embedding it on the document, set an asterisk character before the URL (i.e.: '*http://www.example.com/image.jpg'). |
-| `center` | Set to `true` to center the image if smaller than `width` |
+| `center` | Set to `true` to center the image horizontally if smaller than `width` |
 
 #### Text
 
@@ -122,7 +122,7 @@ All objets needs an attribute named `type` whose value will determine what objec
 | `font-size` | Font size in points.<br/>The default value is the current size. If no size has been specified since the beginning of the document, the value taken is 12. |
 | `font-style` | Font style. Possible values are (case insensitive):<ul><li>empty string: regular</li><li>B: bold</li><li>I: italic</li><li>U: underline</li><li>D: line through</li><li>O: overline</li></ul> or any combination.<br />The default value is regular.<br />Bold and italic styles do not apply to Symbol and ZapfDingbats basic fonts or other fonts when not defined. |
 | `margin` | Margin at the top of the table. |
-| `padding` | internal cell padding. Number oy array of cell paddings for left, top, right and bottom, for example `2` or `[ 2, 2, 2, 2 ]`|
+| `padding` | internal cell padding. Number or array of cell paddings for left, top, right and bottom, for example `2` or `[ 2, 2, 2, 2 ]`|
 | `columns` | Array of columns.<br />Each column can have the following properties:<ul><li><b>width</b>: Column width</li><li><b>text</b>: text to display in the column header. Header won't be displayed if there isn't any header text in any column.</li><li><b>align</b>: text alignment in column. Possible values are:<ul><li>L or empty string: left align</li><li>C: center</li><li>R: right align</li><li>J: justification</li></ul></li></ul>|
 | `rows` | Data to display. Array of rows or object wich implements <code>Iterator</code>. Each row needs to be an array with same number of elements as columns. |
 | `` | |

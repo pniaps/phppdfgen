@@ -19,6 +19,18 @@ abstract class Element
      * @var PDF
      */
     protected $pdf;
+    /**
+     * @var string
+     */
+    protected $old_family;
+    /**
+     * @var string
+     */
+    protected $old_style;
+    /**
+     * @var int
+     */
+    protected $old_size;
 
     public function __construct($data, Document $document, PDF $pdf)
     {
@@ -64,7 +76,7 @@ abstract class Element
         ];
 
         if (is_null($bounds['width']) && !is_null($this->data['right']) && !is_null($this->data['left'])) {
-            $bounds['width'] = $this->data['right'] - $this->data['left'];
+            $bounds['width'] = $this->pdf->getPageWidth() - $this->data['right'] - $this->data['left'];
         }
         if (is_null($bounds['x']) && !is_null($this->data['right']) && !is_null($this->data['width'])) {
             $bounds['x'] = $this->data['right'] - $this->data['width'];

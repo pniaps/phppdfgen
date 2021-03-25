@@ -68,6 +68,8 @@ class Document implements ArrayAccess
             throw new InvalidArgumentException(__METHOD__ . '(): Layout File [ ' . $layout . ' ] "footer" must be array');
         }
 
+        $this->getPdf();
+
         return $this;
     }
 
@@ -93,11 +95,6 @@ class Document implements ArrayAccess
         return $this->pdf;
     }
 
-    public function assign()
-    {
-        return $this;
-    }
-
     public function render()
     {
         $old_cwd = getcwd();
@@ -111,7 +108,7 @@ class Document implements ArrayAccess
                     $this->pdf->SetY($this->saved_y, false);
                 }else {
                     $object = Element::create($data, $this, $this->getPdf());
-                    $object->render($this);
+                    $object->render();
                 }
             }
         }
@@ -285,7 +282,8 @@ class Document implements ArrayAccess
      *
      * @param  array|string  $key
      * @param  mixed  $value
-     * @return mixed
+     *
+     * @return $this|mixed|null
      */
     public function data($key = null, $value = null)
     {
@@ -297,10 +295,10 @@ class Document implements ArrayAccess
             foreach ($key as $innerKey => $innerValue) {
                 $this->setData($innerKey, $innerValue);
             }
-            return null;
+            return $this;
         }else if(!is_null($value)){
             $this->setData($key, $value);
-            return null;
+            return $this;
         }
 
         return $this->getData($key);
@@ -362,5 +360,35 @@ class Document implements ArrayAccess
             $array = $array[$segment];
         }
         return $array;
+    }
+
+    public function SetTitle($title)
+    {
+        $this->pdf->SetTitle($title);
+        return $this;
+    }
+
+    public function SetSubject($subject)
+    {
+        $this->pdf->SetSubject($subject);
+        return $this;
+    }
+
+    public function SetAuthor($author)
+    {
+        $this->pdf->SetAuthor($author);
+        return $this;
+    }
+
+    public function SetKeywords($keywords)
+    {
+        $this->pdf->SetKeywords($keywords);
+        return $this;
+    }
+
+    public function SetCreator($creator)
+    {
+        $this->pdf->SetCreator($creator);
+        return $this;
     }
 }

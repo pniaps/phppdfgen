@@ -13,6 +13,7 @@
   ],
   "require": {
     "php": ">=7.0.0",
+    "ext-json": "*",
     "tecnickcom/tcpdf": "~6.2"
   },
   "autoload": {
