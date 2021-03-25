@@ -92,7 +92,7 @@ All objets needs an attribute named `type` whose value will determine what objec
 | `type` | `text` |
 | `left` | Abscissa of upper-left corner. `true` value indicates current abscissa. |
 | `top` | Ordinate of upper-left corner. `true` value indicates current ordinate. |
-| `width` | Width. Don't define if you want to use `right`. |
+| `width` | (float) Width. If 0, extend up to the right margin of the page. Don't define if you want to use `right`. |
 | `height` | Height. Don't define if you want to use `bottom`. |
 | `right` | Abscissa of bottom-right corner. Don't define `width` to use this. |
 | `bottom` | Ordinate of bottom-right corner. Don't define `height` to use this. |
@@ -108,6 +108,9 @@ All objets needs an attribute named `type` whose value will determine what objec
 | `font-style` | Font style. Possible values are (case insensitive):<ul><li>empty string: regular</li><li>B: bold</li><li>I: italic</li><li>U: underline</li><li>D: line through</li><li>O: overline</li></ul> or any combination.<br />The default value is regular.<br />Bold and italic styles do not apply to Symbol and ZapfDingbats basic fonts or other fonts when not defined. |
 | `text` | Text to print. |
 | `margin` | Margin at the top of the text block. |
+| `padding` | internal cell padding. Number or array of cell paddings for left, top, right and bottom, for example `2` or `[ 2, 2, 2, 2 ]`|
+| `next` | Indicates where the current position should go after the call. Possible values are:<ul><li>0: to the right</li><li>1: to the beginning of the next line [DEFAULT]</li><li>2: right below</li><li>3: below</li></ul>. |
+
 
 #### Table
 
