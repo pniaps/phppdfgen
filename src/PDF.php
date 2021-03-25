@@ -39,12 +39,25 @@ class PDF extends TCPDF
     {
         $this->document = $document;
 
+        if(isset($layout['document']['margin']) && !is_array($layout['document']['margin'])){
+            //convert '10' => [10, 10, 10, 10]
+            $layout['document']['margin']= [
+                (float)$layout['document']['margin'],
+                (float)$layout['document']['margin'],
+                (float)$layout['document']['margin'],
+                (float)$layout['document']['margin']
+            ];
+        }
+
         $this->SetMargins(
             $layout['document']['margin'][0], //left
             $layout['document']['margin'][1], //top
             $layout['document']['margin'][2] //right
         );
-        $this->SetAutoPageBreak(true, $layout['document']['margin'][4]);
+        $this->SetHeaderMargin($layout['document']['margin'][1]); //top
+        $this->SetFooterMargin($layout['document']['margin'][3]); //bottom
+
+        $this->SetAutoPageBreak(true, $layout['document']['margin'][3]); //bottom
 
         $this->layout = $layout;
 
@@ -96,7 +109,7 @@ class PDF extends TCPDF
             $this->y = $top;
         }
 
-        $this->SetTopMargin($this->y + (float)$this->layout['header']['margin']);
+        $this->SetTopMargin($this->y + (float)($this->layout['header']['margin'] ?? $this->layout['document']['margin'][1]));
     }
 
     public function Footer()
