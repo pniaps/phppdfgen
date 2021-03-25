@@ -102,7 +102,7 @@ class Document implements ArrayAccess
                 if($data=='saveY'){
                     $this->saved_y = $this->pdf->GetY();
                 }else if($data=='restoreY'){
-                    $this->pdf->SetY($this->saved_y);
+                    $this->pdf->SetY($this->saved_y, false);
                 }else {
                     $object = Element::create($data, $this, $this->getPdf());
                     $object->render($this);

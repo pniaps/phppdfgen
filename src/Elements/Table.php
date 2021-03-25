@@ -11,7 +11,10 @@ class Table extends Element
 {
     public function render()
     {
-        $this->pdf->SetY($this->pdf->GetY() + (float)$this->data['margin']);
+        $marging = (float)$this->data['margin'];
+        if($marging){
+            $this->pdf->SetY($this->pdf->GetY() + $marging, false);
+        }
 
         $columns = $this->data['columns'];
         $numColumns = count($columns);
@@ -81,6 +84,7 @@ class Table extends Element
         }
 
         $this->restoreFont();
+
         if ($this->data['padding']) {
             $this->pdf->SetCellPaddings($padding['L'], $padding['T'], $padding['R'], $padding['B']);
         }
