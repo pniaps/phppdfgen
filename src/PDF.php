@@ -5,6 +5,7 @@ namespace ppg;
 
 
 use TCPDF;
+use TCPDF_COLORS;
 
 /**
  * Class PDF
@@ -169,5 +170,10 @@ class PDF extends TCPDF
     {
         $this->Image($img, 0, 0, 0, 0, '', '', '', false, 300, '', false, false, 0, false,true);
         return [$this->getImageRBX(), $this->getImageRBY()];
+    }
+
+    public function convertHTMLColorToDec($hcolor, $default = false)
+    {
+        return TCPDF_COLORS::convertHTMLColorToDec($hcolor,$this->spot_colors, $default);
     }
 }

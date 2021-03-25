@@ -6,7 +6,6 @@ namespace ppg\Elements;
 
 use InvalidArgumentException;
 use ppg\Element;
-use TCPDF_COLORS;
 
 class Table extends Element
 {
@@ -19,7 +18,7 @@ class Table extends Element
 
         $border = $this->getBorder();
         if (isset($this->data['border-color'])) {
-            $border['LTRB']['color'] = TCPDF_COLORS::convertHTMLColorToDec($this->data['border-color'], $this->pdf->getAllSpotColors());
+            $border['LTRB']['color'] = $this->pdf->convertHTMLColorToDec($this->data['border-color']);
         }
 
         $this->setFont($this->data['font-family'], $this->data['font-style'], $this->data['font-size']);

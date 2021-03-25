@@ -5,7 +5,6 @@ namespace ppg\Elements;
 
 
 use ppg\Element;
-use TCPDF_COLORS;
 
 class Rect extends Element
 {
@@ -16,7 +15,7 @@ class Rect extends Element
 
         $border = $this->data['border'] ? $this->pdf->getCSSBorderStyle($this->data['border']) : null;
 
-        $fill_color = $this->data['background-color'] ? TCPDF_COLORS::convertHTMLColorToDec($this->data['background-color'],$this->pdf->getAllSpotColors()) : null;
+        $fill_color = $this->data['background-color'] ? $this->pdf->convertHTMLColorToDec($this->data['background-color']) : null;
 
         $style = '';
 

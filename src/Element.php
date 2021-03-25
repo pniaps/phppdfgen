@@ -5,7 +5,6 @@ namespace ppg;
 
 
 use InvalidArgumentException;
-use TCPDF_COLORS;
 
 abstract class Element
 {
@@ -114,7 +113,7 @@ abstract class Element
 //            }
 //        }
 //        if (isset($this->data['border-color'])) {
-//            $border['color'] = TCPDF_COLORS::convertHTMLColorToDec($this->data['border-color'], $this->pdf->getAllSpotColors());
+//            $border['color'] = $this->pdf->convertHTMLColorToDec($this->data['border-color']);
 //        }
 //
 //        return $border;
@@ -127,10 +126,10 @@ abstract class Element
         }
         if (isset($this->data['border-color'])) {
             $brd_colors = preg_split('/[\s]+/', trim($this->data['border-color']));
-            $border['L']['color'] = TCPDF_COLORS::convertHTMLColorToDec($brd_colors[3] ?: $brd_colors[0], $this->pdf->getAllSpotColors());
-            $border['R']['color'] = TCPDF_COLORS::convertHTMLColorToDec($brd_colors[1] ?: $brd_colors[0], $this->pdf->getAllSpotColors());
-            $border['T']['color'] = TCPDF_COLORS::convertHTMLColorToDec($brd_colors[0], $this->pdf->getAllSpotColors());
-            $border['B']['color'] = TCPDF_COLORS::convertHTMLColorToDec($brd_colors[2] ?: $brd_colors[0], $this->pdf->getAllSpotColors());
+            $border['L']['color'] = $this->pdf->convertHTMLColorToDec($brd_colors[3] ?: $brd_colors[0]);
+            $border['R']['color'] = $this->pdf->convertHTMLColorToDec($brd_colors[1] ?: $brd_colors[0]);
+            $border['T']['color'] = $this->pdf->convertHTMLColorToDec($brd_colors[0]);
+            $border['B']['color'] = $this->pdf->convertHTMLColorToDec($brd_colors[2] ?: $brd_colors[0]);
         }
         if (isset($this->data['border-width'])) {
             $brd_widths = preg_split('/[\s]+/', trim($this->data['border-width']));
@@ -183,7 +182,7 @@ abstract class Element
                 }
             }
             if (isset($this->data['border-'.$bsv.'-color'])) {
-                $border[$bsk]['color'] = TCPDF_COLORS::convertHTMLColorToDec($this->data['border-'.$bsv.'-color'], $this->pdf->getAllSpotColors());
+                $border[$bsk]['color'] = $this->pdf->convertHTMLColorToDec($this->data['border-'.$bsv.'-color']);
             }
             if (isset($this->data['border-'.$bsv.'-width'])) {
                 $border[$bsk]['width'] = $this->pdf->getCSSBorderWidth($this->data['border-'.$bsv.'-width']);

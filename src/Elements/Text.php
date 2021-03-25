@@ -6,7 +6,6 @@ namespace ppg\Elements;
 
 use InvalidArgumentException;
 use ppg\Element;
-use TCPDF_COLORS;
 
 class Text extends Element
 {
@@ -21,13 +20,13 @@ class Text extends Element
             throw new InvalidArgumentException(__METHOD__ . '(): Invalid align value [ ' . $align . ' ]');
         }
 
-        $fill_color = TCPDF_COLORS::convertHTMLColorToDec($this->data['background-color'],$this->pdf->getAllSpotColors(), false);
+        $fill_color = $this->pdf->convertHTMLColorToDec($this->data['background-color']);
         if($fill_color){
             $this->pdf->saveFillColor();
             $this->pdf->SetFillColorArray($fill_color);
         }
 
-        $text_color = TCPDF_COLORS::convertHTMLColorToDec($this->data['color'],$this->pdf->getAllSpotColors(), false);
+        $text_color = $this->pdf->convertHTMLColorToDec($this->data['color']);
         if($text_color){
             $this->pdf->saveTextColor();
             $this->pdf->SetTextColorArray($text_color);
