@@ -12,6 +12,8 @@ class Document implements ArrayAccess
 {
     protected $layout = null;
 
+    protected $layouPath = null;
+
     /**
      * @var PDF null
      */
@@ -56,6 +58,8 @@ class Document implements ArrayAccess
 
         $this->layout = $json;
 
+        $this->layouPath = dirname($layout);
+
         if(isset($this->layout['header']) && !is_array($this->layout['header'])){
             throw new InvalidArgumentException(__METHOD__ . '(): Layout File [ ' . $layout . ' ] "header" must be array');
         }
@@ -74,13 +78,13 @@ class Document implements ArrayAccess
     {
         if (!$this->pdf) {
 
-            if (!isset(TCPDF_STATIC::$page_formats[$this->layout['document']['page-format']])) {
+            if (isset($this->layout['document']['page-format']) && !isset(TCPDF_STATIC::$page_formats[$this->layout['document']['page-format']])) {
                 throw new InvalidArgumentException(__METHOD__ . '(): Invalid page-format [ ' . $this->layout['document']['page-format'] . ' ]');
             }
 
             $this->pdf = new PDF(
                 $this->layout['document']['orientation'] ?: 'portrait',
-                $this->layout['document']['unit'] ?: 'mm', //TODO: Document
+                $this->layout['document']['unit'] ?: 'mm',
                 $this->layout['document']['page-format'] ?: 'A4'
             );
 
@@ -96,6 +100,8 @@ class Document implements ArrayAccess
 
     public function render()
     {
+        $old_cwd = getcwd();
+        chdir($this->layouPath);
         $this->getPdf()->AddPage();
         if($this->layout['body'] && is_array($this->layout['body']['objects'])){
             foreach ($this->layout['body']['objects'] as $data) {
@@ -109,7 +115,13 @@ class Document implements ArrayAccess
                 }
             }
         }
+        chdir($old_cwd);
         return $this;
+    }
+
+    public function getLayoutPath()
+    {
+        return $this->layouPath;
     }
 
     public function setFileName($name)

@@ -96,6 +96,9 @@ class PDF extends TCPDF
 
     public function Header()
     {
+        $old_cwd = getcwd();
+        chdir($this->document->getLayoutPath());
+
         //restore global padding
         $this->configurePadding();
 
@@ -110,10 +113,15 @@ class PDF extends TCPDF
         }
 
         $this->SetTopMargin($this->y + (float)($this->layout['header']['margin'] ?? $this->layout['document']['margin'][1]));
+
+        chdir($old_cwd);
     }
 
     public function Footer()
     {
+        $old_cwd = getcwd();
+        chdir($this->document->getLayoutPath());
+
         //restore global padding
         $this->configurePadding();
 
@@ -123,6 +131,8 @@ class PDF extends TCPDF
                 $object->render();
             }
         }
+
+        chdir($old_cwd);
     }
 
     public function saveFillColor()
